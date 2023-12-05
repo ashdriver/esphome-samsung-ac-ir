@@ -44,9 +44,9 @@ void HaierClimate::set_sensor(sensor::Sensor *sensor) { this->sensor_ = sensor; 
 
 void HaierClimate::setup_ir_cmd() {
   if (this->mode == climate::CLIMATE_MODE_OFF) {
-    ac_->off();
+    ac_->kHaierAcCmdOff();
   } else {
-    ac_->on();
+    ac_->kHaierAcCmdOn();
     if (this->mode == climate::CLIMATE_MODE_AUTO) {
       ac_->setMode(kHaierAcAuto);
     } else if (this->mode == climate::CLIMATE_MODE_COOL) {
@@ -64,7 +64,7 @@ void HaierClimate::setup_ir_cmd() {
     if (this->fan_mode == climate::CLIMATE_FAN_AUTO) {
       ac_->setFan(kHaierAcFanAuto);
     } else if (this->fan_mode == climate::CLIMATE_FAN_LOW) {
-      ac_->setFan(kHaierAcanLow);
+      ac_->setFan(kHaierAcFanLow);
     } else if (this->fan_mode == climate::CLIMATE_FAN_MEDIUM) {
       ac_->setFan(kHaierAcFanMed);
     } else if (this->fan_mode == climate::CLIMATE_FAN_HIGH) {
@@ -79,7 +79,6 @@ void HaierClimate::setup_ir_cmd() {
 
     ac_->setSleep(this->preset == climate::CLIMATE_PRESET_SLEEP);
     ac_->setHealth(this->preset == climate::CLIMATE_PRESET_COMFORT);
-    ac_->setTurbo(this->preset == climate::CLIMATE_PRESET_BOOST);
   }
 }
 
