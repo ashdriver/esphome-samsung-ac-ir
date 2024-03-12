@@ -11,7 +11,7 @@ SamsungClimate = samsung_ac_ns.class_("SamsungClimate", climate.Climate)
 
 CONFIG_SCHEMA = climate.CLIMATE_SCHEMA.extend(
     {
-        cv.GenerateID(): cv.declare_id(samsunglimate),
+        cv.GenerateID(): cv.declare_id(SamsungClimate),
         cv.Required(CONF_SENSOR_ID): cv.use_id(sensor.Sensor),
         cv.Required(CONF_PIN): cv.int_
     }
