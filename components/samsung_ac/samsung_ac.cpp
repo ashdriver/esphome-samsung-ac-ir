@@ -44,9 +44,9 @@ void SamsungClimate::set_sensor(sensor::Sensor *sensor) { this->sensor_ = sensor
 
 void SamsungClimate::setup_ir_cmd() {
   if (this->mode == climate::CLIMATE_MODE_OFF) {
-    ac_->kSamsungAcCmdOff();
+    ac_->setPower(false);
   } else {
-    ac_->kSamsungAcCmdOn();
+    ac_->setPower(true);
     if (this->mode == climate::CLIMATE_MODE_AUTO) {
       ac_->setMode(kSamsungAcAuto);
     } else if (this->mode == climate::CLIMATE_MODE_COOL) {
@@ -72,9 +72,9 @@ void SamsungClimate::setup_ir_cmd() {
     }
 
     if (this->swing_mode == climate::CLIMATE_SWING_OFF) {
-      ac_->setSwing(kSamsungAcSwingV);
+      ac_->setSwing(kSamsungAcSwingOff);
     } else if (this->swing_mode == climate::CLIMATE_SWING_VERTICAL) {
-      ac_->setSwing(kSamsungAcCmdSwing);
+      ac_->setSwing(kSamsungAcSwingV);
     }
 
     ac_->setSleep(this->preset == climate::CLIMATE_PRESET_SLEEP);
