@@ -72,13 +72,13 @@ void SamsungClimate::setup_ir_cmd() {
     }
 
     if (this->swing_mode == climate::CLIMATE_SWING_OFF) {
-      ac_->setSwing(kSamsungAcSwingOff);
+      ac_->setSwing(false);
     } else if (this->swing_mode == climate::CLIMATE_SWING_VERTICAL) {
-      ac_->setSwing(kSamsungAcSwingV);
+      ac_->setSwing(true);
     }
 
-    ac_->setSleep(this->preset == climate::CLIMATE_PRESET_SLEEP);
-    ac_->setHealth(this->preset == climate::CLIMATE_PRESET_COMFORT);
+ //   ac_->setSleep(this->preset == climate::CLIMATE_PRESET_SLEEP);
+    //ac_->setHealth(this->preset == climate::CLIMATE_PRESET_COMFORT);
   }
 }
 
@@ -89,8 +89,8 @@ climate::ClimateTraits SamsungClimate::traits() {
   traits.set_supported_fan_modes(
       {climate::CLIMATE_FAN_LOW, climate::CLIMATE_FAN_MEDIUM, climate::CLIMATE_FAN_HIGH, climate::CLIMATE_FAN_AUTO});
   traits.set_supported_swing_modes({climate::CLIMATE_SWING_OFF, climate::CLIMATE_SWING_VERTICAL});
-  traits.set_supported_presets({climate::CLIMATE_PRESET_NONE, climate::CLIMATE_PRESET_SLEEP,
-                                climate::CLIMATE_PRESET_COMFORT, climate::CLIMATE_PRESET_BOOST});
+  traits.set_supported_presets({climate::CLIMATE_PRESET_NONE, /*climate::CLIMATE_PRESET_SLEEP,*/
+                                /*climate::CLIMATE_PRESET_COMFORT,*/ climate::CLIMATE_PRESET_BOOST});
 
   traits.set_visual_max_temperature(SAMSUNG_AC_TEMP_MAX);
   traits.set_visual_min_temperature(SAMSUNG_AC_TEMP_MIN);
