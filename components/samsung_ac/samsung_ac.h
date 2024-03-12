@@ -23,7 +23,7 @@ class SamsungClimate : public climate::Climate {
   void init(sensor::Sensor *sensor, uint16_t pin);
  
  protected:
-  IRSamsungAC *ac_{nullptr};
+  IRSamsungAc *ac_{nullptr};
   sensor::Sensor *sensor_{nullptr};
   
   void setup_ir_cmd();

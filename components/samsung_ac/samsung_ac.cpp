@@ -7,7 +7,7 @@ static const char *const TAG = "climate.samsung_ac";
 
 void SamsungClimate::init(sensor::Sensor *sensor, uint16_t pin) {
   this->set_sensor(sensor);
-  ac_ = new IRSamsungAC(pin);
+  ac_ = new IRSamsungAc(pin);
   if (this->sensor_) {
     this->sensor_->add_on_state_callback([this](float state) {
       this->current_temperature = state;
