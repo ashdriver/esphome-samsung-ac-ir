@@ -22,7 +22,7 @@ web_server:
 external_components:
   - source:
       type: git
-      url: https://github.com/rozh1/esphome-samsung-ac-ir
+      url: https://github.com/ashdriver/esphome-samsung-ac-ir
 
 sensor:
   # External temperature sensor from Home Assistant 
@@ -33,5 +33,5 @@ sensor:
 climate:
   - platform: samsung_ac
     sensor_id: current_temperature
-    pin: 3 # Pin with IR led
+    pin: 4 # Pin with IR led
     name: "AC Samsung"
