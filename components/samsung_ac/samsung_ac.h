@@ -6,24 +6,24 @@
 
 #include "IRremoteESP8266.h"
 #include "IRsend.h"
-#include "ir_Haier.h"
+#include "ir_Samsung.h"
 
 
 namespace esphome {
-namespace haier_ac {
+namespace samsung_ac {
 
-const uint8_t HAIER_AC_TEMP_MIN = 16;  // 16C
-const uint8_t HAIER_AC_TEMP_MAX = 30;  // 32C
+const uint8_t SAMSUNG_AC_TEMP_MIN = 16;  // 16C
+const uint8_t SAMSUNG_AC_TEMP_MAX = 30;  // 32C
 
-class HaierClimate : public climate::Climate {
+class SamsungClimate : public climate::Climate {
  public:
-  HaierClimate() : climate::Climate() {}
+  SamsungClimate() : climate::Climate() {}
  public:
   void set_sensor(sensor::Sensor *sensor);
   void init(sensor::Sensor *sensor, uint16_t pin);
  
  protected:
-  IRHaierAC *ac_{nullptr};
+  IRSamsungAC *ac_{nullptr};
   sensor::Sensor *sensor_{nullptr};
   
   void setup_ir_cmd();
@@ -33,5 +33,5 @@ class HaierClimate : public climate::Climate {
 
 };
 
-}  // namespace haier_ac
+}  // namespace samsung_ac
 }  // namespace esphome

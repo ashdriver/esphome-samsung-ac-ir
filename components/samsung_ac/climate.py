@@ -6,12 +6,12 @@ from esphome.core import CORE
 
 AUTO_LOAD = ["climate"]
 
-haier_ac_ns = cg.esphome_ns.namespace("haier_ac")
-HaierClimate = haier_ac_ns.class_("HaierClimate", climate.Climate)
+samsung_ac_ns = cg.esphome_ns.namespace("samsung_ac")
+SamsungClimate = samsung_ac_ns.class_("SamsungClimate", climate.Climate)
 
 CONFIG_SCHEMA = climate.CLIMATE_SCHEMA.extend(
     {
-        cv.GenerateID(): cv.declare_id(HaierClimate),
+        cv.GenerateID(): cv.declare_id(samsunglimate),
         cv.Required(CONF_SENSOR_ID): cv.use_id(sensor.Sensor),
         cv.Required(CONF_PIN): cv.int_
     }

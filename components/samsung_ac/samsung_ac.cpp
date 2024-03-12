@@ -1,13 +1,13 @@
-#include "haier_ac.h"
+#include "samsung_ac.h"
 
 namespace esphome {
-namespace haier_ac {
+namespace samsung_ac {
 
-static const char *const TAG = "climate.haier_ac";
+static const char *const TAG = "climate.samsung_ac";
 
-void HaierClimate::init(sensor::Sensor *sensor, uint16_t pin) {
+void SamsungClimate::init(sensor::Sensor *sensor, uint16_t pin) {
   this->set_sensor(sensor);
-  ac_ = new IRHaierAC(pin);
+  ac_ = new IRSamsungAC(pin);
   if (this->sensor_) {
     this->sensor_->add_on_state_callback([this](float state) {
       this->current_temperature = state;
@@ -36,45 +36,45 @@ void HaierClimate::init(sensor::Sensor *sensor, uint16_t pin) {
   ac_->begin();
   this->setup_ir_cmd();
 
-  ESP_LOGD("DEBUG", "Haier A/C remote is in the following state:");
+  ESP_LOGD("DEBUG", "Samsung A/C remote is in the following state:");
   ESP_LOGD("DEBUG", "  %s\n", ac_->toString().c_str());
 }
 
-void HaierClimate::set_sensor(sensor::Sensor *sensor) { this->sensor_ = sensor; }
+void SamsungClimate::set_sensor(sensor::Sensor *sensor) { this->sensor_ = sensor; }
 
-void HaierClimate::setup_ir_cmd() {
+void SamsungClimate::setup_ir_cmd() {
   if (this->mode == climate::CLIMATE_MODE_OFF) {
-    ac_->kHaierAcCmdOff();
+    ac_->kSamsungAcCmdOff();
   } else {
-    ac_->kHaierAcCmdOn();
+    ac_->kSamsungAcCmdOn();
     if (this->mode == climate::CLIMATE_MODE_AUTO) {
-      ac_->setMode(kHaierAcAuto);
+      ac_->setMode(kSamsungAcAuto);
     } else if (this->mode == climate::CLIMATE_MODE_COOL) {
-      ac_->setMode(kHaierAcCool);
+      ac_->setMode(kSamsungAcCool);
     } else if (this->mode == climate::CLIMATE_MODE_HEAT) {
-      ac_->setMode(kHaierAcHeat);
+      ac_->setMode(kSamsungAcHeat);
     } else if (this->mode == climate::CLIMATE_MODE_DRY) {
-      ac_->setMode(kHaierAcDry);
+      ac_->setMode(kSamsungAcDry);
     } else if (this->mode == climate::CLIMATE_MODE_FAN_ONLY) {
-      ac_->setMode(kHaierAcFan);
+      ac_->setMode(kSamsungAcFan);
     }
 
     ac_->setTemp((uint8_t)this->target_temperature);
 
     if (this->fan_mode == climate::CLIMATE_FAN_AUTO) {
-      ac_->setFan(kHaierAcFanAuto);
+      ac_->setFan(kSamsungAcFanAuto);
     } else if (this->fan_mode == climate::CLIMATE_FAN_LOW) {
-      ac_->setFan(kHaierAcFanLow);
+      ac_->setFan(kSamsungAcFanLow);
     } else if (this->fan_mode == climate::CLIMATE_FAN_MEDIUM) {
-      ac_->setFan(kHaierAcFanMed);
+      ac_->setFan(kSamsungAcFanMed);
     } else if (this->fan_mode == climate::CLIMATE_FAN_HIGH) {
-      ac_->setFan(kHaierAcFanHigh);
+      ac_->setFan(kSamsungAcFanHigh);
     }
 
     if (this->swing_mode == climate::CLIMATE_SWING_OFF) {
-      ac_->setSwing(kHaierAcSwingV);
+      ac_->setSwing(kSamsungAcSwingV);
     } else if (this->swing_mode == climate::CLIMATE_SWING_VERTICAL) {
-      ac_->setSwing(kHaierAcCmdSwing);
+      ac_->setSwing(kSamsungAcCmdSwing);
     }
 
     ac_->setSleep(this->preset == climate::CLIMATE_PRESET_SLEEP);
@@ -82,7 +82,7 @@ void HaierClimate::setup_ir_cmd() {
   }
 }
 
-climate::ClimateTraits HaierClimate::traits() {
+climate::ClimateTraits SamsungClimate::traits() {
   auto traits = climate::ClimateTraits();
   traits.set_supported_modes({climate::CLIMATE_MODE_OFF, climate::CLIMATE_MODE_COOL, climate::CLIMATE_MODE_HEAT,
                               climate::CLIMATE_MODE_FAN_ONLY, climate::CLIMATE_MODE_DRY, climate::CLIMATE_MODE_AUTO});
@@ -92,15 +92,15 @@ climate::ClimateTraits HaierClimate::traits() {
   traits.set_supported_presets({climate::CLIMATE_PRESET_NONE, climate::CLIMATE_PRESET_SLEEP,
                                 climate::CLIMATE_PRESET_COMFORT, climate::CLIMATE_PRESET_BOOST});
 
-  traits.set_visual_max_temperature(HAIER_AC_TEMP_MAX);
-  traits.set_visual_min_temperature(HAIER_AC_TEMP_MIN);
+  traits.set_visual_max_temperature(SAMSUNG_AC_TEMP_MAX);
+  traits.set_visual_min_temperature(SAMSUNG_AC_TEMP_MIN);
   traits.set_visual_temperature_step(1);
   traits.set_supports_current_temperature(true);
 
   return traits;
 }
 
-void HaierClimate::control(const climate::ClimateCall &call) {
+void SamsungClimate::control(const climate::ClimateCall &call) {
   if (call.get_mode().has_value()) 
     this->mode = *call.get_mode();
 
@@ -121,9 +121,9 @@ void HaierClimate::control(const climate::ClimateCall &call) {
 
   this->publish_state();
 
-  ESP_LOGD("DEBUG", "Haier A/C remote is in the following state:");
+  ESP_LOGD("DEBUG", "Samsung A/C remote is in the following state:");
   ESP_LOGD("DEBUG", "  %s\n", ac_->toString().c_str());
 }
 
-}  // namespace haier_acyrw02
+}  // namespace samsung_ac
 }  // namespace esphome

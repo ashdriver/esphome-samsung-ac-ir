@@ -1,4 +1,4 @@
-# ESPHome Haier AC IR remote control component
+# ESPHome Samsung AC IR remote control component
 
 This implementation of the ESPHome component to control HVAC with IR channel.
 
@@ -6,9 +6,7 @@ Base implementation of the protocol can be found here: [https://github.com/crank
 
 ## Supported AC
 
-* YR-W02
-* HSU-09HMC203
-* HSU-07HMD203/R2
+* Samsung Inverter
 
 ## How to use
 
@@ -22,12 +20,12 @@ sensor:
     entity_id: ${temperature_sensor}
 ```
 
-2. Add climate component, set platform as `haier_acyrw02`, set `sensor_id` and `pin` number for IR LED. 
+2. Add climate component, set platform as `samsung_ac`, set `sensor_id` and `pin` number for IR LED. 
 
 ```
 climate:
-  - platform: haier_acyrw02
+  - platform: samsung_ac
     sensor_id: current_temperature # Sensor ID with the current temperature
     pin: 3 # Pin with IR led
-    name: "AC Haier"
+    name: "AC Samsung"
 ```
