@@ -18,7 +18,7 @@ CONFIG_SCHEMA = climate.climate_schema(SamsungClimate).extend(
 
 async def to_code(config):
     if CORE.is_esp8266 or CORE.is_esp32:
-        cg.add_library("ashdriver/IRremoteESP8266")
+        cg.add_library("ashdriver/IRremoteESP8266",None)
 
     var = await climate.new_climate(config)
     await climate.register_climate(var, config)
