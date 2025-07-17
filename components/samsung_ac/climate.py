@@ -1,7 +1,7 @@
 import esphome.codegen as cg
 import esphome.config_validation as cv
 from esphome.components import climate, sensor
-from esphome.const import CONF_ID, CONF_SENSOR_ID, CONF_PIN
+from esphome.const import CONF_SENSOR_ID, CONF_PIN
 from esphome.core import CORE
 
 AUTO_LOAD = ["climate"]
@@ -9,9 +9,8 @@ AUTO_LOAD = ["climate"]
 samsung_ac_ns = cg.esphome_ns.namespace("samsung_ac")
 SamsungClimate = samsung_ac_ns.class_("SamsungClimate", climate.Climate)
 
-CONFIG_SCHEMA = climate.CLIMATE_SCHEMA.extend(
+CONFIG_SCHEMA = climate.climate_schema(SamsungClimate).extend(
     {
-        cv.GenerateID(): cv.declare_id(SamsungClimate),
         cv.Required(CONF_SENSOR_ID): cv.use_id(sensor.Sensor),
         cv.Required(CONF_PIN): cv.int_
     }
