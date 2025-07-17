@@ -20,7 +20,7 @@ async def to_code(config):
     if CORE.is_esp8266 or CORE.is_esp32:
         cg.add_library("crankyoldgit/IRremoteESP8266", "2.8.6")
 
-    var = cg.new_Pvariable(config[CONF_ID])
+    var = await climate.new_climate(config)
     await climate.register_climate(var, config)
     
     sens = await cg.get_variable(config[CONF_SENSOR_ID])
