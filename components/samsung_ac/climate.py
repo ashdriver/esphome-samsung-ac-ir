@@ -18,10 +18,8 @@ CONFIG_SCHEMA = climate.climate_schema(SamsungClimate).extend(
 
 async def to_code(config):
     if CORE.is_esp8266 or CORE.is_esp32:
-        cg.add_library("crankyoldgit/IRremoteESP8266",None)
-        cg.add_library(
-        name="IRremoteESP8266",
-        repository="https://github.com/BorisKofman/IRremoteESP8266.git" )
+        #cg.add_library("crankyoldgit/IRremoteESP8266",None)
+        cg.add_library( name="IRremoteESP8266",repository="https://github.com/BorisKofman/IRremoteESP8266.git" )
 
     var = await climate.new_climate(config)
     await climate.register_climate(var, config)
